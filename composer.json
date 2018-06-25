@@ -1,0 +1,30 @@
+{
+    "name": "diu/atomic-fusion-menu",
+    "type": "neos-plugin",
+    "description": "Atomic fusion menu implementation",
+    "require": {
+        "neos/neos": ">=3.3",
+        "neos/fusion-afx": "1.*"
+    },
+    "suggest": {
+        "neos/fusion-afx": "*"
+    },
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Alexander Kappler",
+            "email": "alexander.kappler@di-unternehmer.com",
+            "role": "Technical Lead"
+        },
+        {
+            "name": "Jawad Nawaz",
+            "email": "jawad@di-unternehmer.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DIU\\Atomic\\Fusion\\Menu\\": "Classes"
+        }
+    }
+}

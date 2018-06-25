@@ -1,0 +1,54 @@
+prototype(DIU.Atomic.Fusion.Menu:Component.Atom.Hyperlink.Default) < prototype(Neos.Fusion:Component) {
+
+    #
+    # Styleguide annotation
+    # if this annotation is present (even when empty)
+    # the prototype is rendered in the styleguide
+    #
+    @styleguide {
+
+        #
+        # The title of the component
+        # Optional:  by default the component name is splitted and reversed
+        #
+        title = 'Atom Hyperlink'
+
+        #
+        # A description of the component
+        # Optional: By default empty.
+        #
+        description = 'A Hyperlink Atom.'
+        @propTypes {
+            UrlToRedirect = ${PropTypes.string.isRequired}
+            content = ${PropTypes.string}
+            classNames = ${PropTypes.string}
+        }
+
+        #
+        # Fusion-props to override during the styleguide rendering
+        # Optional: By default empty.
+        #
+        props {
+            content = 'My label'
+        }
+    }
+
+    content = ''
+    classNames = ''
+
+    #
+    # The code afx`...` is converted to the fusion code below at parse time.
+    # Attention: Currently there is no way to escape closing-backticks inside the Expression.
+    #
+
+    renderer = Neos.Fusion:Tag {
+        tagName = 'a'
+        content = ${props.content.label}
+        attributes {
+            href = Neos.Neos:NodeUri {
+                node = ${props.content.node}
+            }
+            class = ${'atom-hyperlink-default ' + props.classNames}
+        }
+    }
+}
