@@ -7,9 +7,6 @@ use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
 use Neos\Fusion\Exception as FusionException;
 use Neos\Fusion\Exception;
-use Neos\Flow\Log\ThrowableStorageInterface;
-use Neos\Neos\Service\LinkingService;
-
 /**
  * A Fusion Menu object
  */
@@ -40,25 +37,6 @@ class MenuImplementation extends AbstractMenuImplementation
      * @var integer
      */
     protected $maximumLevels;
-
-
-    /**
-     * @Flow\Inject
-     * @var ThrowableStorageInterface
-     */
-    protected $systemLogger;
-
-    /**
-     * @Flow\Inject
-     * @var NodeDataRepository
-     */
-    protected $nodeDataRepository;
-
-    /**
-     * @Flow\Inject
-     * @var LinkingService
-     */
-    protected $linkingService;
 
     /**
      * The last navigation level which should be rendered.
@@ -155,7 +133,7 @@ class MenuImplementation extends AbstractMenuImplementation
      */
     protected function buildItems()
     {
-        $items = array();
+        $items = [];
 
         if ($this->getItemCollection() !== null) {
             $menuLevelCollection = $this->getItemCollection();
@@ -178,7 +156,7 @@ class MenuImplementation extends AbstractMenuImplementation
      */
     protected function buildMenuLevelRecursive(array $menuLevelCollection)
     {
-        $items = array();
+        $items = [];
         foreach ($menuLevelCollection as $currentNode) {
             $item = $this->buildMenuItemRecursive($currentNode);
             if ($item === null) {
@@ -203,12 +181,12 @@ class MenuImplementation extends AbstractMenuImplementation
             return null;
         }
 
-        $item = array(
+        $item = [
             'node' => $currentNode,
             'state' => self::STATE_NORMAL,
             'label' => $currentNode->getLabel(),
             'menuLevel' => $this->currentLevel
-        );
+        ];
 
         $item['state'] = $this->calculateItemState($currentNode);
         if (!$this->isOnLastLevelOfMenu($currentNode)) {

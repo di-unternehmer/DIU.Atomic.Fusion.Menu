@@ -1,0 +1,55 @@
+prototype(DIU.Atomic.Fusion.Menu:Component.Molecule.DimensionsMenu) < prototype(Neos.Fusion:Component) {
+
+    @styleguide {
+
+        #
+        # The title of the component
+        # Optional:  by default the component name is splitted and reversed
+        #
+        title = 'Molecule Dimensions Menu'
+
+        #
+        # A description of the component
+        # Optional: By default empty.
+        #
+        description = 'Shows all available languages'
+        @propTypes {
+            items = ${PropTypes.Array.isRequired}
+            classNames = ${PropTypes.string}
+        }
+
+        #
+        # Fusion-props to override during the styleguide rendering
+        # Optional: By default empty.
+        #
+        props {
+            classNames = ''
+            items = Neos.Fusion:RawArray {
+                0 = ${{label:'Menu Item 1', state: 'current'}}
+                1 = ${{label:'Menu Item 2', state: 'normal'}}
+                2 = ${{label:'Menu Item 3', state: 'normal'}}
+                3 = ${{label:'Menu Item 4', state: 'normal'}}
+
+            }
+        }
+    }
+
+    items = ${[]}
+    classNames = ''
+
+#
+    # The code afx`...` is converted to the fusion code below at parse time.
+    # Attention: Currently there is no way to escape closing-backticks inside the Expression.
+    #
+    renderer = afx`
+        <div class={'container molecule-navigation-top ' + props.classNames}>
+            <ul class='navigation_bar'>
+                <Neos.Fusion:Collection collection={props.items} itemName='navItem' @children='itemRenderer' iterationName='itemIterator'>
+                    <li class={navItem.state}>
+                        <DIU.Atomic.Fusion.Menu:Component.Atom.Hyperlink.Default content={navItem} classNames={'nav_item_' + itemIterator.index} />
+                    </li>
+                </Neos.Fusion:Collection>
+            </ul>
+       </div>
+    `
+}

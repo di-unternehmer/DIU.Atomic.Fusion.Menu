@@ -1,0 +1,23 @@
+# A menu without the need for a template
+prototype(DIU.Atomic.Fusion.Menu:Menu) < prototype(Neos.Fusion:Value)  {
+    @class = 'DIU\\Atomic\\Fusion\\Menu\\FusionObjects\\MenuImplementation'
+
+    entryLevel = ${this.startingPoint ? 0 : 1}
+    maximumLevels = 2
+
+    filter = 'Neos.Neos:Document'
+    attributes = Neos.Fusion:Attributes
+    renderHiddenInIndex = false
+
+    # Returns array of nodes for rendering a menu
+    value = ${this.items}
+
+    @exceptionHandler = 'Neos\\Fusion\\Core\\ExceptionHandlers\\ContextDependentHandler'
+}
+
+
+prototype(DIU.Atomic.Fusion.Menu:MenuComponent) < prototype(Neos.Fusion:Component) {
+    renderer = DIU.Atomic.Fusion.Menu:Component.Molecule.Navigation.Main {
+        items = DIU.Atomic.Fusion.Menu:Menu
+    }
+}

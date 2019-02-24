@@ -1,0 +1,27 @@
+# DIU.Atomic.Fusion.Menu:DimensionsMenu provides dimension (e.g. language) menu rendering for afx
+prototype(DIU.Atomic.Fusion.Menu:DimensionsMenu) < prototype(Neos.Fusion:Value) {
+    @class = 'DIU\\Atomic\\Fusion\\Menu\\FusionObjects\\DimensionsMenuImplementation'
+
+    # the "absent" state is assigned to items for dimension (combinations) for which no node variant exists
+	absent.attributes = Neos.Fusion:Attributes {
+        class = 'normal'
+    }
+
+    # if documents which are hidden in index should be rendered or not
+	renderHiddenInIndex = true
+
+    # name of the dimension to use (optional)
+	# dimension = 'language'
+
+    # list of presets, if the default order should be overridden, only used with "dimension" set
+	# presets = ${['en_US']}
+
+    # if true, items for all presets will be included, ignoring dimension constraints
+	includeAllPresets = false
+}
+
+prototype(DIU.Atomic.Fusion.Menu:DimensionsMenuComponent) < prototype(Neos.Fusion:Component) {
+    renderer = DIU.Atomic.Fusion.Menu:Component.Molecule.DimensionsMenu {
+        items = DIU.Atomic.Fusion.Menu:DimensionsMenu
+    }
+}
